@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 int main() {
     int secretNumber, userGuess, attempts = 0;
-    char response;
+    char response[10];
 
     srand(time(NULL));
     secretNumber = rand() % 100 + 1;
@@ -20,11 +21,16 @@ int main() {
             printf("Too low! Try again.\n");
         }
 
-        printf("Would you like to try again? (Yes/No) ");
-        scanf(" %c", &response);
-    } while (response == 'y' && userGuess != secretNumber);
+        if (userGuess != secretNumber) {
+            printf("Would you like to try again? (Yes/No) ");
+            scanf("%s", response);
+        }
 
-    printf("Congratulations! You guessed the secret number %d in %d attempts.\n", secretNumber, attempts);
+    } while ((strcasecmp(response, "yes") == 0 || strcasecmp(response, "y") == 0) && userGuess != secretNumber);
+
+    if (userGuess == secretNumber) {
+        printf("Congratulations! You guessed the secret number %d in %d attempts.\n", secretNumber, attempts);
+    }
 
     return 0;
 }

@@ -13,6 +13,12 @@ int main() {
     do {
         printf("Guess the Secret number between 1 and 100: ");
         scanf("%d", &userGuess);
+
+        if (userGuess < 1 || userGuess > 100) {
+            printf("Invalid input! Please enter a number between 1 and 100.\n");
+            continue; 
+        }
+
         attempts++;
 
         if (userGuess > secretNumber) {

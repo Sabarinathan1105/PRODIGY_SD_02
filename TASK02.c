@@ -10,13 +10,13 @@ int main() {
     srand(time(NULL));
     secretNumber = rand() % 100 + 1;
 
-    do {
+    while (1) {  // infinite loop — we'll break manually
         printf("Guess the Secret number between 1 and 100: ");
         scanf("%d", &userGuess);
 
         if (userGuess < 1 || userGuess > 100) {
             printf("Invalid input! Please enter a number between 1 and 100.\n");
-            continue; 
+            continue;
         }
 
         attempts++;
@@ -25,17 +25,19 @@ int main() {
             printf("Too high! Try again.\n");
         } else if (userGuess < secretNumber) {
             printf("Too low! Try again.\n");
+        } else {
+            // Correct guess
+            printf("Congratulations! You guessed the secret number %d in %d attempts.\n", secretNumber, attempts);
+            break;
         }
 
-        if (userGuess != secretNumber) {
-            printf("Would you like to try again? (Yes/No) ");
-            scanf("%s", response);
+        printf("Would you like to try again? (Yes/No) ");
+        scanf("%s", response);
+
+        if (strcasecmp(response, "no") == 0 || strcasecmp(response, "n") == 0) {
+            printf("The secret number was: %d\n", secretNumber);
+            break;
         }
-
-    } while ((strcasecmp(response, "yes") == 0 || strcasecmp(response, "y") == 0) && userGuess != secretNumber);
-
-    if (userGuess == secretNumber) {
-        printf("Congratulations! You guessed the secret number %d in %d attempts.\n", secretNumber, attempts);
     }
 
     return 0;

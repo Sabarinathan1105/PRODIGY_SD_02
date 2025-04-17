@@ -11,7 +11,7 @@ int main() {
     secretNumber = rand() % 100 + 1;
 
     do {
-        printf("Guess the Secret number between 1 and 1000: ");
+        printf("Guess the Secret number between 1 and 100: ");
         scanf("%d", &userGuess);
         attempts++;
 
